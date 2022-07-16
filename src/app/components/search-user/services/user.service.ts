@@ -11,18 +11,17 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class SignupService {
+export class UserService {
 
   baseUrl: string = environment.api_baseUrl;
 
   constructor(private httpClient: HttpClient) { }
 
-  CreateLogin(username: string, password: string) {
-    let requestBody = {
-      username: username,
-      password: password,
-      friends: []
-    };
-    return this.httpClient.post(this.baseUrl + 'users', requestBody, httpOptions);
+  GetAllUser() {
+    return this.httpClient.get(this.baseUrl + 'users');
+  }
+
+  AddUserAsFriend(user: any) {
+    return this.httpClient.patch(this.baseUrl + 'users', user, httpOptions);
   }
 }

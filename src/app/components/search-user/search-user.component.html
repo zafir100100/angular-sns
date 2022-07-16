@@ -1,0 +1,19 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<table class="table table-sm table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Username</th>
+      <th scope="col" colspan="2">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of users; index as i">
+      <th scope="row" style="text-align: center">{{i}}</th>
+      <td  style="text-align: left">{{item?.username}}</td>
+      <td><i style="margin-right: 1rem;" class="fa-solid fa-square-plus"></i><i class="fa-solid fa-trash-can"></i></td>
+    </tr>
+  </tbody>
+</table>
+

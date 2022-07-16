@@ -3,32 +3,38 @@
     {
       "id": 1,
       "username": "alex",
-      "password": 1
+      "password": 1,
+      "friends": []
     },
     {
       "id": 3,
       "username": "bob",
-      "password": 1
+      "password": 1,
+      "friends": []
     },
     {
       "id": 3,
       "username": "rob",
-      "password": 1
+      "password": 1,
+      "friends": []
     },
     {
       "id": 4,
       "username": "alice",
-      "password": 1
+      "password": 1,
+      "friends": []
     },
     {
       "id": 5,
       "username": "max",
-      "password": 1
+      "password": 1,
+      "friends": []
     },
     {
       "username": "a",
       "password": "1",
-      "id": 6
+      "id": 6,
+      "friends": []
     }
   ],
   "posts": [
