@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { UserService } from 'src/app/services/user/user.service';
 import { environment } from 'src/environments/environment';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-search-user',
@@ -11,16 +12,24 @@ import { environment } from 'src/environments/environment';
 export class SearchUserComponent implements OnInit {
 
   users: any = [];
+  backupUsers: any = [];
   viewUser: any = null;
   display = 'none';
   currentUserId: number = Number(localStorage.getItem('userId') ?? 0) ?? 0;
 
-  constructor(private userService: UserService) { }
+  form!: FormGroup;
+
+  constructor(private userService: UserService, private fb: FormBuilder) {
+    this.form = this.fb.group({
+      search: ['max'],
+    });
+  }
 
   ngOnInit(): void {
     this.userService.GetAllUser().subscribe(
       (lol1) => {
         this.users = lol1 ?? [];
+        this.backupUsers = lol1 ?? [];
       },
       (lol2) => {
         Swal.fire({
@@ -129,5 +138,26 @@ export class SearchUserComponent implements OnInit {
 
   onCloseHandled() {
     this.display = "none";
+  }
+
+  search() {
+    let username: string = this.form.get('search')?.value;
+    this.userService.GetAllUser().subscribe(
+      (lol1) => {
+        if (username == null || username == undefined || username == "") {
+          this.backupUsers = lol1 ?? [];
+          this.users = lol1 ?? [];
+        }
+        this.backupUsers = lol1 ?? [];
+        this.users = this.backupUsers.filter((x: { username: string; }) => x.username.includes(username)) ?? this.backupUsers;
+      },
+      (lol2) => {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Oops...',
+          text: 'No user found!',
+        });
+      }
+    );
   }
 }

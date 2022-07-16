@@ -2,10 +2,10 @@
   integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
   crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-<form>
+<form [formGroup]="form">
   <div class="form-row">
     <div class="col-7">
-      <input type="text" class="form-control" placeholder="Search">
+      <input type="text" class="form-control" placeholder="Search" formControlName="search" (keyup)="search()">
     </div>
   </div>
 </form>
