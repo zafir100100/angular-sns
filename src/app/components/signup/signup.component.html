@@ -1,1 +1,19 @@
-<p>signup works!</p>
+<div class="container mt-3">
+    <h2>Signup</h2>
+    <form action="/action_page.php" [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="mb-3 mt-3">
+            <label for="username">Username:</label>
+            <input type="tel" class="form-control" id="username" placeholder="Enter username" name="username" formControlName="username">
+        </div>
+        <div class="mb-3">
+            <label for="pwd">Password:</label>
+            <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" formControlName="password">
+        </div>
+        <div class="form-check mb-3">
+            <label class="form-check-label">
+                <input class="form-check-input" type="checkbox" name="remember"> Remember me
+            </label>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
