@@ -40,4 +40,9 @@ export class SearchUserComponent implements OnInit {
 
   }
 
+  GetFriend(user: any){
+
+  }
+
+
 }

@@ -1,5 +1,13 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+<form>
+  <div class="form-row">
+    <div class="col-7">
+      <input type="text" class="form-control" placeholder="Search">
+    </div>
+  </div>
+</form>
+
 <table class="table table-sm table-bordered">
   <thead>
     <tr>
@@ -12,7 +20,7 @@
     <tr *ngFor="let item of users; index as i">
       <th scope="row" style="text-align: center">{{i}}</th>
       <td  style="text-align: left">{{item?.username}}</td>
-      <td><i style="margin-right: 1rem;" class="fa-solid fa-square-plus"></i><i class="fa-solid fa-trash-can"></i></td>
+      <td><i style="margin-right: 1rem;" class="fa-solid fa-square-plus"></i><i style="margin-right: 1rem;" class="fa-solid fa-trash-can"></i><i class="fa-solid fa-eye"></i></td>
     </tr>
   </tbody>
 </table>
