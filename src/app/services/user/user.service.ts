@@ -35,7 +35,7 @@ export class UserService {
   }
 
   AddUserAsFriend(user: any) {
-    return this.httpClient.patch(this.baseUrl + 'users', user, httpOptions);
+    return this.httpClient.patch(this.baseUrl + 'users/' + user?.id, user, httpOptions);
   }
 
   GetUser(id: number) {

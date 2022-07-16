@@ -13,6 +13,7 @@ export class SearchUserComponent implements OnInit {
   users: any = [];
   viewUser: any = null;
   display = 'none';
+  currentUserId: number = Number(localStorage.getItem('userId') ?? 0) ?? 0;
 
   constructor(private userService: UserService) { }
 
@@ -32,16 +33,90 @@ export class SearchUserComponent implements OnInit {
   }
 
   AddFriend(user: any) {
-
+    let myUser: any = this.users.find((x: { id: number; }) => x.id == this.currentUserId);
+    if (myUser) {
+      let friends: number[] = myUser?.friends ?? [];
+      if (friends.indexOf(user?.id) == -1) {
+        friends.push(user?.id);
+        this.userService.AddUserAsFriend(myUser).subscribe(
+          (lol1) => {
+            Swal.fire({
+              icon: 'success',
+              title: 'Success',
+              text: 'Friend Added!',
+            });
+          },
+          (lol2) => {
+            Swal.fire({
+              icon: 'success',
+              title: 'Success',
+              text: 'Friend Add Failed!',
+            });
+          }
+        );
+      } else {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Oops...',
+          text: 'Already in friendlist!',
+        });
+      }
+    } else {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Oops...',
+        text: 'Invalid User!',
+      });
+    }
   }
 
   DeleteFriend(user: any) {
-
+    let myUser: any = this.users.find((x: { id: number; }) => x.id == this.currentUserId);
+    if (myUser) {
+      let friends: number[] = myUser?.friends ?? [];
+      if (friends.indexOf(user?.id) == -1) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Oops...',
+          text: 'Not in friendlist!',
+        });
+      } else {
+        const index = friends.indexOf(user?.id, 0);
+        if (index > -1) {
+          friends.splice(index, 1);
+          this.userService.AddUserAsFriend(myUser).subscribe(
+            (lol1) => {
+              Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: 'Friend Deleted!',
+              });
+            },
+            (lol2) => {
+              Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: 'Friend Deletion Failed!',
+              });
+            }
+          );
+        }
+      }
+    } else {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Oops...',
+        text: 'Invalid User!',
+      });
+    }
   }
 
-  IsFriend(user: any): boolean {
-    return this.users.find((x: { friends: number[]; }) => x.friends.includes(user?.id)) ?? false;
-  }
+  // IsFriend(user: any): boolean {
+  //   let userFriends: number[] = user?.friends ?? [];
+  //   console.log(userFriends);
+
+  //   return userFriends.indexOf(this.currentUserId) > -1;
+  // }
 
   GetUser(id: number) {
     return this.users.find((x: { id: number; }) => x?.id == id) ?? null;
@@ -51,6 +126,7 @@ export class SearchUserComponent implements OnInit {
     this.viewUser = user;
     this.display = "block";
   }
+
   onCloseHandled() {
     this.display = "none";
   }

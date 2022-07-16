@@ -41,7 +41,21 @@ export class LoginComponent implements OnInit {
       (lol1) => {
         let myResponseString = lol1.toString();
         if (myResponseString != "") {
-          this.router.navigate(['v']);
+          localStorage.setItem('username', lol1.toString());
+          if (Array.isArray(lol1)) {
+            let x: any[] = Object.entries(lol1);
+            if (x.length >= 1) {
+              localStorage.setItem('username', x[0][1]?.username);
+              localStorage.setItem('userId', x[0][1]?.id);
+              this.router.navigate(['v']);
+            } else {
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Invalid server response!',
+              });
+            }
+          }
         } else {
           Swal.fire({
             icon: 'error',

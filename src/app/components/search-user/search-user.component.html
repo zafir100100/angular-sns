@@ -20,10 +20,13 @@
   </thead>
   <tbody>
     <tr *ngFor="let item of users; index as i">
-      <th scope="row" style="text-align: center">{{i+1}}</th>
-      <td style="text-align: left">{{item?.username}}</td>
-      <td><i style="margin-right: 1rem;" class="fa-solid fa-square-plus"></i><i style="margin-right: 1rem;"
-          class="fa-solid fa-trash-can"></i><i class="fa-solid fa-eye" (click)="openModal(item)"></i></td>
+      <th scope="row" style="text-align: center" *ngIf="item?.id != currentUserId">{{i+1}}</th>
+      <td style="text-align: left" *ngIf="item?.id != currentUserId">{{item?.username}}</td>
+      <td *ngIf="item?.id != currentUserId">
+        <i style="margin-right: 1rem;" class="fa-solid fa-square-plus" (click)="AddFriend(item)"></i>
+        <i style="margin-right: 1rem;" class="fa-solid fa-trash-can" (click)="DeleteFriend(item)"></i>
+        <i class="fa-solid fa-eye" (click)="openModal(item)"></i>
+      </td>
     </tr>
   </tbody>
 </table>
