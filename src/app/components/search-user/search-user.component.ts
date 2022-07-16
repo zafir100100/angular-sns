@@ -120,13 +120,6 @@ export class SearchUserComponent implements OnInit {
     }
   }
 
-  // IsFriend(user: any): boolean {
-  //   let userFriends: number[] = user?.friends ?? [];
-  //   console.log(userFriends);
-
-  //   return userFriends.indexOf(this.currentUserId) > -1;
-  // }
-
   GetUser(id: number) {
     return this.users.find((x: { id: number; }) => x?.id == id) ?? null;
   }
