@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
-import { UserService } from './services/user.service';
+import { UserService } from 'src/app/services/user/user.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-search-user',
@@ -10,6 +11,8 @@ import { UserService } from './services/user.service';
 export class SearchUserComponent implements OnInit {
 
   users: any = [];
+  viewUser: any = null;
+  display = 'none';
 
   constructor(private userService: UserService) { }
 
@@ -28,21 +31,27 @@ export class SearchUserComponent implements OnInit {
     );
   }
 
-  AddFriend(user: any){
+  AddFriend(user: any) {
 
   }
 
-  DeleteFriend(user: any){
+  DeleteFriend(user: any) {
 
   }
 
-  IsFriend(user: any){
-
+  IsFriend(user: any): boolean {
+    return this.users.find((x: { friends: number[]; }) => x.friends.includes(user?.id)) ?? false;
   }
 
-  GetFriend(user: any){
-
+  GetUser(id: number) {
+    return this.users.find((x: { id: number; }) => x?.id == id) ?? null;
   }
 
-
+  openModal(user: any) {
+    this.viewUser = user;
+    this.display = "block";
+  }
+  onCloseHandled() {
+    this.display = "none";
+  }
 }

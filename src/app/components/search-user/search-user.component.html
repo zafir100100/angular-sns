@@ -1,4 +1,6 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+  integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+  crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <form>
   <div class="form-row">
@@ -11,17 +13,38 @@
 <table class="table table-sm table-bordered">
   <thead>
     <tr>
-      <th scope="col">#</th>
+      <th style="text-align: center;" scope="col">#</th>
       <th scope="col">Username</th>
-      <th scope="col" colspan="2">Action</th>
+      <th scope="col" colspan="3">Action</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let item of users; index as i">
-      <th scope="row" style="text-align: center">{{i}}</th>
-      <td  style="text-align: left">{{item?.username}}</td>
-      <td><i style="margin-right: 1rem;" class="fa-solid fa-square-plus"></i><i style="margin-right: 1rem;" class="fa-solid fa-trash-can"></i><i class="fa-solid fa-eye"></i></td>
+      <th scope="row" style="text-align: center">{{i+1}}</th>
+      <td style="text-align: left">{{item?.username}}</td>
+      <td><i style="margin-right: 1rem;" class="fa-solid fa-square-plus"></i><i style="margin-right: 1rem;"
+          class="fa-solid fa-trash-can"></i><i class="fa-solid fa-eye" (click)="openModal(item)"></i></td>
     </tr>
   </tbody>
 </table>
 
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">{{viewUser?.username}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"><span
+            aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body" *ngIf="viewUser?.friends?.length >= 1">
+        <h2>Friends</h2>
+        <div *ngFor="let item of viewUser?.friends; index as i">
+          <p>{{i+1}} - {{GetUser(item)?.username}}</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="onCloseHandled()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

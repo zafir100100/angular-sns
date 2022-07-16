@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { LoginService } from './services/login.service';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   form!: FormGroup;
 
-  constructor(private fb: FormBuilder, private loginService: LoginService, private router: Router) { }
+  constructor(private fb: FormBuilder, private loginService: UserService, private router: Router) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
