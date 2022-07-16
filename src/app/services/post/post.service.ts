@@ -16,5 +16,12 @@ export class PostService {
   baseUrl: string = environment.api_baseUrl;
 
   constructor(private httpClient: HttpClient) { }
-  
+
+  GetAllPost() {
+    return this.httpClient.get(this.baseUrl + 'posts');
+  }
+
+  CreatePost(post: any) {
+    return this.httpClient.post(this.baseUrl + 'posts', post, httpOptions);
+  }
 }

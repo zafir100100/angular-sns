@@ -1,1 +1,31 @@
-<p>view works!</p>
+<!-- <ul class="list-group">
+    <li class="list-group-item" *ngFor="let item of posts">
+        {{item.id}}
+    </li>
+</ul> -->
+
+
+<div class="card">
+    <div class="card-header">
+        Write !!!
+    </div>
+    <div class="card-body">
+        <!-- <h5 class="card-title">Special title treatment</h5> -->
+        <input type="text" placeholder="Say Something" part="" class="card-text">
+        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+    </div>
+    <div class="card-footer">
+        <button class="btn btn-sm btn-primary" type="submit">Submit</button>
+    </div>
+</div>
+
+<div class="card" *ngFor="let item of posts">
+    <div class="card-header" *ngIf="getUserName(item?.userId)!=null">
+        {{getUserName(item?.userId)}}
+    </div>
+    <div class="card-body" *ngIf="getUserName(item?.userId)!=null">
+        <!-- <h5 class="card-title">Special title treatment</h5> -->
+        <p class="card-text">{{item.body}}</p>
+        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+    </div>
+</div>
