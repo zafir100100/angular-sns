@@ -6,10 +6,11 @@ import { environment } from './../../../../environments/environment';
   providedIn: 'root'
 })
 export class LoginService {
+  baseUrl: string = environment.api_baseUrl;
 
   constructor(private httpClient: HttpClient) { }
 
   GetLogin(username: string, password: string) {
-    return this.httpClient.get(environment.api_baseUrl + 'users?username=' + username + '&password=' + password);
+    return this.httpClient.get(this.baseUrl + 'users?username=' + username + '&password=' + password);
   }
 }
