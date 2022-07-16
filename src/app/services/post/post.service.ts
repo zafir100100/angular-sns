@@ -24,4 +24,8 @@ export class PostService {
   CreatePost(post: any) {
     return this.httpClient.post(this.baseUrl + 'posts', post, httpOptions);
   }
+
+  DeletePost(postId: any) {
+    return this.httpClient.delete(this.baseUrl + 'posts/'+ postId);
+  }
 }

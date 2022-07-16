@@ -6,26 +6,27 @@
 
 
 <div class="card">
-    <div class="card-header">
-        Write !!!
-    </div>
-    <div class="card-body">
-        <!-- <h5 class="card-title">Special title treatment</h5> -->
-        <input type="text" placeholder="Say Something" part="" class="card-text">
-        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-    </div>
-    <div class="card-footer">
-        <button class="btn btn-sm btn-primary" type="submit">Submit</button>
-    </div>
+    <form [formGroup]="form" (ngSubmit)="CreatePost()">
+        <div class="card-header">
+            Write !!!
+        </div>
+        <div class="card-body">
+            <input type="text" placeholder="Say Something" class="card-text" formControlName="body">
+        </div>
+        <div class="card-footer">
+            <button class="btn btn-sm btn-primary" type="submit">Submit</button>
+        </div>
+    </form>
 </div>
 
 <div class="card" *ngFor="let item of posts">
-    <div class="card-header" *ngIf="getUserName(item?.userId)!=null">
-        {{getUserName(item?.userId)}}
+    <div class="card-header" *ngIf="GetUserName(item?.userId)!=null">
+        {{GetUserName(item?.userId)}}
     </div>
-    <div class="card-body" *ngIf="getUserName(item?.userId)!=null">
-        <!-- <h5 class="card-title">Special title treatment</h5> -->
+    <div class="card-body" *ngIf="GetUserName(item?.userId)!=null">
         <p class="card-text">{{item.body}}</p>
-        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+    </div>
+    <div class="card-footer" *ngIf="item?.userId ==currentUserId">
+        <button class="btn btn-sm btn-danger" type="submit" (click)="DeletePost(item?.id)">Delete</button>
     </div>
 </div>
